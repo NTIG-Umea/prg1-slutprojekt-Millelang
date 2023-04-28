@@ -24,3 +24,6 @@ skjuta iväg den genom att trycka på en knapp(space)
 * Ljudeffekter då man skjuter
 * Animation då man skjuter iväg pucken
 * Fina karaktärer
+
+28-04
+Skapade variabler och bilder och hitboxes för bilderna
