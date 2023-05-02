@@ -10,10 +10,13 @@ import java.net.MalformedURLException;
 public class Slutprojekt extends Canvas implements Runnable {
     private BufferStrategy bs;
 
-    private Rectangle spelare1 = new Rectangle(960, 540, 100,100);
+    private Rectangle spelare1 = new Rectangle(960, 540, 50,50);
 
-    private Rectangle spelare2 = new Rectangle(960, 540, 100,100);
+    private Rectangle spelare2 = new Rectangle(960, 540, 100,50);
 
+    private Rectangle Pucken = new Rectangle(960,540,20,20);
+
+    private Rectangle planhitbox = new Rectangle(0,0,1224,632);
     private boolean running = false;
     private Thread thread;
 
@@ -47,7 +50,7 @@ public class Slutprojekt extends Canvas implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setSize(1400, 800);
+        setSize(1224, 634);
         JFrame frame = new JFrame();
         frame.add(this);
         this.addKeyListener(new MyKeyListener());
@@ -75,9 +78,18 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     public void draw(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight());
+        g.drawImage(plan,planhitbox.x,planhitbox.y,(int)planhitbox.getWidth(),(int)planhitbox.getHeight(),null);
+        g.setColor(Color.black);
+        g.drawOval(Pucken.x,Pucken.y,20,20);
+        g.drawImage(spelare, spelare1.x, spelare1.y,(int)spelare1.getWidth(),(int)spelare1.getHeight(),null);
     }
 
     private void update() {
+        spelare1.x += Spelare1VX;
+        spelare1.y += Spelare1VY;
+        spelare2.x += Spelare2VX;
+        spelare2.y += Spelare2VY;
+        System.out.println(Spelare1VY);
     }
 
     public static void main(String[] args) {
@@ -130,10 +142,45 @@ public class Slutprojekt extends Canvas implements Runnable {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            if (e.getKeyChar() == 'a') {
+                Spelare1VX = -15;
+            }
+            if (e.getKeyChar() == 'd') {
+                Spelare1VX = 15;
+            }
+            if (e.getKeyChar() == 'w') {
+                Spelare1VY = 15;
+            }
+            if (e.getKeyChar() == 's') {
+                Spelare1VY = -15;
+            }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
+            if (e.getKeyChar() == 'a') {
+                Spelare1VX = 0;
+            }
+            if (e.getKeyChar() == 'd') {
+                Spelare1VX = 0;
+            }
+            if (e.getKeyChar() == 'w') {
+                Spelare1VY = 0;
+            }  if (e.getKeyChar() == 's') {
+                Spelare1VY = 0;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                Spelare2VY = -8;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                Spelare2VY = 8;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                Spelare2VX = 8;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                Spelare2VX = -8;
+            }
         }
     }
 
