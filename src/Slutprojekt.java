@@ -12,7 +12,7 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private Rectangle spelare1 = new Rectangle(960, 540, 50,50);
 
-    private Rectangle spelare2 = new Rectangle(960, 540, 100,50);
+    private Rectangle spelare2 = new Rectangle(960, 540, 50,50);
 
     private Rectangle Pucken = new Rectangle(960,540,20,20);
 
@@ -30,7 +30,11 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private BufferedImage plan;
 
+    private int puckvx;
+
+    private int puckvy;
     private BufferedImage spelare;
+    private BufferedImage spelare22;
 
     int WIDTH = 1400;
     int HEIGHT = 800;
@@ -45,6 +49,13 @@ public class Slutprojekt extends Canvas implements Runnable {
         }
         try {
             spelare = ImageIO.read(getClass().getResource("spelare.jpg"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            spelare22 = ImageIO.read(getClass().getResource("spelare23.jpg"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -80,16 +91,26 @@ public class Slutprojekt extends Canvas implements Runnable {
         g.clearRect(0, 0, getWidth(), getHeight());
         g.drawImage(plan,planhitbox.x,planhitbox.y,(int)planhitbox.getWidth(),(int)planhitbox.getHeight(),null);
         g.setColor(Color.black);
-        g.drawOval(Pucken.x,Pucken.y,20,20);
+        g.fillOval(Pucken.x,Pucken.y,20,20);
         g.drawImage(spelare, spelare1.x, spelare1.y,(int)spelare1.getWidth(),(int)spelare1.getHeight(),null);
+        g.drawImage(spelare22, spelare2.x, spelare2.y,(int)spelare2.getWidth(),(int)spelare2.getHeight(),null);
     }
 
     private void update() {
+
+        if (spelare1.y>Pucken.y && spelare1.intersects(Pucken)) {
+            puckvx = Spelare1VX;
+            puckvy = Spelare1VY;
+
+        }
+
         spelare1.x += Spelare1VX;
         spelare1.y += Spelare1VY;
         spelare2.x += Spelare2VX;
         spelare2.y += Spelare2VY;
-        System.out.println(Spelare1VY);
+        Pucken.x += puckvx;
+        Pucken.y += puckvy;
+
     }
 
     public static void main(String[] args) {
@@ -113,7 +134,7 @@ public class Slutprojekt extends Canvas implements Runnable {
     }
 
     public void run() {
-        double ns = 1000000000.0 / 25.0;
+        double ns = 1000000000.0 / 60.0;
         double delta = 0;
         long lastTime = System.nanoTime();
 
@@ -143,16 +164,28 @@ public class Slutprojekt extends Canvas implements Runnable {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyChar() == 'a') {
-                Spelare1VX = -15;
+                Spelare1VX = -5;
             }
             if (e.getKeyChar() == 'd') {
-                Spelare1VX = 15;
+                Spelare1VX = 5;
             }
             if (e.getKeyChar() == 'w') {
-                Spelare1VY = 15;
+                Spelare1VY = -5;
             }
             if (e.getKeyChar() == 's') {
-                Spelare1VY = -15;
+                Spelare1VY = 5;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                Spelare2VY = -5;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                Spelare2VY = 5;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                Spelare2VX = -5;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                Spelare2VX = 5;
             }
         }
 
@@ -170,16 +203,16 @@ public class Slutprojekt extends Canvas implements Runnable {
                 Spelare1VY = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                Spelare2VY = -8;
+                Spelare2VY = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                Spelare2VY = 8;
+                Spelare2VY = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                Spelare2VX = 8;
+                Spelare2VX = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                Spelare2VX = -8;
+                Spelare2VX = 0;
             }
         }
     }
