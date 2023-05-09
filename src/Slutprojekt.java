@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 public class Slutprojekt extends Canvas implements Runnable {
     private BufferStrategy bs;
 
+    private int tid = 0;
+
     private Rectangle spelare1 = new Rectangle(960, 540, 50,50);
 
     private Rectangle spelare2 = new Rectangle(960, 540, 50,50);
@@ -22,8 +24,12 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private int Spelare1VX;
 
+    private boolean puck1ivag = false;
     private int Spelare2VX;
+    private boolean puckWithSpelare1 = false;
 
+    private boolean puck2ivag = false;
+    private boolean puckWithSpelare2 = false;
     private int Spelare1VY;
 
     private int Spelare2VY;
@@ -98,12 +104,55 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private void update() {
 
-        if (spelare1.y>Pucken.y && spelare1.intersects(Pucken)) {
-            puckvx = Spelare1VX;
-            puckvy = Spelare1VY;
-
+        if ( spelare1.intersects(Pucken) && !puckWithSpelare1 && !puck1ivag) {
+            puckWithSpelare1 = true;
+        }
+        if ( spelare2.intersects(Pucken) && !puckWithSpelare2 && !puck2ivag) {
+            puckWithSpelare2 = true;
         }
 
+        if (puckWithSpelare1) {
+            puckvx = Spelare1VX;
+            puckvy = Spelare1VY;
+        }
+        if (puckWithSpelare2) {
+            puckvx = Spelare2VX;
+            puckvy = Spelare2VY;
+        }
+
+        if (spelare1.y < 0) {
+            Spelare1VY = Spelare1VY * (Spelare1VY+2);
+        }
+        if (spelare1.y > 634) {
+            Spelare1VY = Spelare1VY * -(Spelare1VY+2);
+        }
+
+
+        if (Pucken.y > 634) {
+            puckvy=-puckvy;
+        }
+        if (Pucken.y < 0) {
+            puckvy=-puckvy;
+        }
+        if (Pucken.x < 0) {
+            puckvx=-puckvx;
+        }
+        if (Pucken.x > 1224) {
+            puckvx=-puckvx;
+        }
+
+       tid++;
+        if (tid == 180) {
+            puckvx = puckvx/2;
+            puckvy = puckvy/2;
+            tid = 0;
+            puck1ivag = false;
+            puck2ivag = false;
+        }
+
+
+
+        System.out.println(puckvx);
         spelare1.x += Spelare1VX;
         spelare1.y += Spelare1VY;
         spelare2.x += Spelare2VX;
@@ -163,6 +212,24 @@ public class Slutprojekt extends Canvas implements Runnable {
 
         @Override
         public void keyPressed(KeyEvent e) {
+
+            if (e.getKeyChar() == ' ' && puckWithSpelare1) {
+                puckvx += Spelare1VX + Spelare1VX/2;
+                puckvy += Spelare1VY;
+                puckWithSpelare1 = false;
+                puck1ivag = true;
+
+
+            }
+            if (e.getKeyChar() == ' ' && puckWithSpelare2) {
+                puckvx += Spelare2VX + Spelare2VX/2;
+                puckvy += Spelare2VY;
+                puckWithSpelare2 = false;
+                puck2ivag = true;
+
+
+            }
+
             if (e.getKeyChar() == 'a') {
                 Spelare1VX = -5;
             }
