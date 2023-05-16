@@ -12,6 +12,8 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private int tid = 0;
 
+
+
     private Rectangle spelare1 = new Rectangle(960, 540, 50,50);
 
     private Rectangle spelare2 = new Rectangle(960, 540, 50,50);
@@ -34,6 +36,7 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private int Spelare2VY;
 
+    private int tid2;
     private BufferedImage plan;
 
     private int puckvx;
@@ -120,32 +123,54 @@ public class Slutprojekt extends Canvas implements Runnable {
             puckvy = Spelare2VY;
         }
 
-        if (spelare1.y < 0) {
+        if (spelare1.y < 20) {
             Spelare1VY = Spelare1VY * (Spelare1VY+2);
         }
-        if (spelare1.y > 634) {
+        if (spelare1.y > 620) {
             Spelare1VY = Spelare1VY * -(Spelare1VY+2);
         }
+        if (spelare2.y < 20) {
+            Spelare2VY = Spelare2VY * (Spelare2VY+2);
+        }
+        if (spelare2.y > 620) {
+            Spelare2VY = Spelare2VY * -(Spelare2VY+2);
+        }
 
+
+        if (Pucken.x < 105 && Pucken.y >280 && Pucken.y <360 ) {
+            puckvx = 0;
+            puckvy = 0;
+            Pucken.x = 610;
+            Pucken.y = 320;
+            spelare2.x = 1000;
+            spelare2.y = 320;
+
+        }
 
         if (Pucken.y > 634) {
             puckvy=-puckvy;
         }
         if (Pucken.y < 0) {
-            puckvy=-puckvy;
+            puckvy= 20;
         }
         if (Pucken.x < 0) {
-            puckvx=-puckvx;
+            puckvx=-20;
         }
         if (Pucken.x > 1224) {
             puckvx=-puckvx;
         }
-
+        tid2++;
        tid++;
-        if (tid == 180) {
+        if (tid == 120) {
             puckvx = puckvx/2;
             puckvy = puckvy/2;
             tid = 0;
+            puck1ivag = false;
+            puck2ivag = false;
+        }
+        if (tid2 == 10) {
+
+            tid2 = 0;
             puck1ivag = false;
             puck2ivag = false;
         }
