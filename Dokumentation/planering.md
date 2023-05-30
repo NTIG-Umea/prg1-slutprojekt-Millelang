@@ -13,7 +13,6 @@ skjuta iväg den genom att trycka på en knapp(space)
 * Funktion som gör det möjligt att skjuta iväg pucken efter man hhar den i sin ägo. - En funktion som ger pucken en acceleratoin om Space eller R-ctrl är tryckt
 * En funktion som gör så att pucken saktar ner över tid - En funktion i update som minskar farten på pucken varje frame
 * Funktion som gör så att pucken studsar då den nuddar sargen - En if sats som kolla om pucken är högre eller lägre än en vissa x och/eller Y kordinat
-* Hockeyrink som ser bra ut - Skapa en i Swing
 * Funktion som gör så att det går att stjäla pucken - EN funktion somkollar om en spelare har pucken och om den andra spelaren försöker ta den.
 * Funktion som gör så att spelarna hamnar i tekning - En funktion som uppstår efter det blivit mål som startar ett "tekninksläge"
 * tekning funktion - En funktion som sätter båda spelarna lika långt bort från mittzon och lägger pucken i mittzonen.

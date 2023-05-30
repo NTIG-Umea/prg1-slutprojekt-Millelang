@@ -14,9 +14,9 @@ public class Slutprojekt extends Canvas implements Runnable {
 
 
 
-    private Rectangle spelare1 = new Rectangle(960, 540, 50,50);
+    private Rectangle spelare1 = new Rectangle(444, 320, 50,50);
 
-    private Rectangle spelare2 = new Rectangle(960, 540, 50,50);
+    private Rectangle spelare2 = new Rectangle(780, 320, 50,50);
 
     private Rectangle Pucken = new Rectangle(960,540,20,20);
 
@@ -74,8 +74,6 @@ public class Slutprojekt extends Canvas implements Runnable {
         JFrame frame = new JFrame();
         frame.add(this);
         this.addKeyListener(new MyKeyListener());
-        this.addMouseMotionListener(new MyMouseMotionListener());
-        this.addMouseListener(new MyMouseListener());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -114,6 +112,16 @@ public class Slutprojekt extends Canvas implements Runnable {
             puckWithSpelare2 = true;
         }
 
+        if ((spelare2.intersects(spelare1) && puckWithSpelare1) == true)  {
+            puckWithSpelare1 = false;
+            puckWithSpelare2 = true;
+        }
+
+        if ((spelare1.intersects(spelare2) && puckWithSpelare2) == true)  {
+            puckWithSpelare2 = false;
+            puckWithSpelare1 = true;
+        }
+
         if (puckWithSpelare1) {
             puckvx = Spelare1VX;
             puckvy = Spelare1VY;
@@ -137,27 +145,44 @@ public class Slutprojekt extends Canvas implements Runnable {
         }
 
 
-        if (Pucken.x < 105 && Pucken.y >280 && Pucken.y <360 ) {
+        if (Pucken.x < 105) {
+            puckvx = 0;
+            puckvy = 0;
+            Pucken.x = 610;
+            Pucken.y = 320;
+            spelare2.x = 780;
+            spelare2.y = 320;
+            spelare1.x = 444;
+            spelare1.y = 320;
+            puckWithSpelare2 = false;
+            puckWithSpelare1 = false;
+
+        }
+        if (Pucken.x > 1110) {
             puckvx = 0;
             puckvy = 0;
             Pucken.x = 610;
             Pucken.y = 320;
             spelare2.x = 1000;
             spelare2.y = 320;
+            spelare1.x = 444;
+            spelare1.y = 320;
+            puckWithSpelare2 = false;
+            puckWithSpelare1 = false;
 
         }
 
         if (Pucken.y > 634) {
-            puckvy=-puckvy;
+            puckvy= -puckvy;
         }
         if (Pucken.y < 0) {
-            puckvy= 20;
+            puckvy= -puckvy;
         }
         if (Pucken.x < 0) {
-            puckvx=-20;
+            puckvx= -20;
         }
         if (Pucken.x > 1224) {
-            puckvx=-puckvx;
+            puckvx= -puckvx;
         }
         tid2++;
        tid++;
@@ -239,15 +264,15 @@ public class Slutprojekt extends Canvas implements Runnable {
         public void keyPressed(KeyEvent e) {
 
             if (e.getKeyChar() == ' ' && puckWithSpelare1) {
-                puckvx += Spelare1VX + Spelare1VX/2;
+                puckvx += Spelare1VX;
                 puckvy += Spelare1VY;
                 puckWithSpelare1 = false;
                 puck1ivag = true;
 
 
             }
-            if (e.getKeyChar() == ' ' && puckWithSpelare2) {
-                puckvx += Spelare2VX + Spelare2VX/2;
+            if (e.getKeyCode() == KeyEvent.VK_SHIFT && puckWithSpelare2) {
+                puckvx += Spelare2VX;
                 puckvy += Spelare2VY;
                 puckWithSpelare2 = false;
                 puck2ivag = true;
@@ -309,39 +334,4 @@ public class Slutprojekt extends Canvas implements Runnable {
         }
     }
 
-    private class MyMouseListener implements MouseListener {
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
     }
-
-    private class MyMouseMotionListener implements MouseMotionListener {
-
-        @Override
-        public void mouseDragged(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseMoved(MouseEvent e) {
-
-        }
-    }
-}
