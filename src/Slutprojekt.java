@@ -18,7 +18,7 @@ public class Slutprojekt extends Canvas implements Runnable {
 
     private Rectangle spelare2 = new Rectangle(780, 320, 50,50);
 
-    private Rectangle Pucken = new Rectangle(960,540,20,20);
+    private Rectangle Pucken = new Rectangle(0,0,20,20);
 
     private Rectangle planhitbox = new Rectangle(0,0,1224,632);
     private boolean running = false;
@@ -163,7 +163,7 @@ public class Slutprojekt extends Canvas implements Runnable {
             puckvy = 0;
             Pucken.x = 610;
             Pucken.y = 320;
-            spelare2.x = 1000;
+            spelare2.x = 780;
             spelare2.y = 320;
             spelare1.x = 444;
             spelare1.y = 320;
@@ -176,17 +176,19 @@ public class Slutprojekt extends Canvas implements Runnable {
             puckvy= -puckvy;
         }
         if (Pucken.y < 0) {
-            puckvy= -puckvy;
+            puckvy= -puckvy ;
+            puckvx = 2*(puckvx/3);
         }
         if (Pucken.x < 0) {
             puckvx= -20;
-        }
+            puckvx = 2*(puckvx/3);}
+
         if (Pucken.x > 1224) {
             puckvx= -puckvx;
         }
         tid2++;
        tid++;
-        if (tid == 120) {
+        if (tid == 60) {
             puckvx = puckvx/2;
             puckvy = puckvy/2;
             tid = 0;

@@ -1,18 +1,19 @@
-# Titel
+# Slutprojekt programering
 
-Författare och datum.
+Milton Långström 2023-06-02
 
 ## Inledning
 
-Här beskriver du kortfattat arbetets syfte/mål, arbetssätt, genomförande.
+Syftet med detta arbete var att skapa att "hockeyspel" som skulle innehålla ett visst antal funktioner med syftet att efterlikna sporten ishockey. 
 
 ## Bakgrund
 
-Redovisa arbetets olika delar. Så att läsaren förstår vad du gjort och hur.
+De funktioner som jag skapade för att efterlikna puckens rörelse var en "klocka" som saktade ner puckens funktion för hastighet (puckvx och puck vy) varje 60:e frame. Skapade även en funktion som gjorde så att om puckens y position varje större eller mindre än planens max och min värde av y så får pucken motsatt hastighet i y (-puckvy). Även så att då pucken går i mål så startar båda spelarna och pucken i mitt posistion som om det vore en vanlig hockeymatch.
 
-Använd gärna bilder för att illustrera.
+Skapade även en funktion med syftet att efterlikna ett "hockeyskott" så när spelare1 trycker på space eller spelare2 trycker på rightshift och har pucken i sin ägo så skjuts den iväg med samma y hastighet som spelarenoch en lite snabbare x hastighet än spelaren.
 
-För att lägga till bilder i markdown. Bilderna kan du ladda upp med Git som vanligt, länka dem med url eller filnamnet.
+Skapade också en funktion som registrerar om spelaren nuddar pucken vilken gör så att spelaren "plockar upp" pucken och kan röra sig med den och skjuta, gjorde även så att om den andra spelaren nuddar pucken då den första spelaren har den i sin ägo så tar den andra spelaren pucken ifrån den första.
+
 
 ```
 ![GitHub Logo](/images/logo.png)
@@ -23,13 +24,10 @@ Format: ![Alt Text](url)
 
 ## Positiva erfarenheter
 
-Här beskriver du vad som har gått bra i ditt projekt och analyserar varför. Hur ska du upprepa framgångarna.
-
+Lärt mig hur man använder swing och dess egenskaper på ett mycket effektivt och bra sätt.
 ## Negativa erfarenheter
 
-Här beskriver du det som du anser har gått mindre bra med ditt projekt och analyserar hur du kan undvika detta i framtida projekt.
-
+Hade lite problem med att göra en bra mål funktion vilket ledde till att jag var tvungen att börja om helt eftersom jag hade tänkt att det endast skulle gå att göra mål i det "riktiga" målet.
 ## Sammanfattning
 
-Här redovisar du dina slutsatser, erfarenheter och lärdomar. Reflektera över din produkt och dess/dina utvecklingsmöjligheter.
-Vad kan vidareutvecklas och finns det utrymme att bygga vidare på projektet.
+ Tycker att detta projekt blev ganska bra eftersom att det blev nästan precis som jag ville förutom några små detaljer som målet och tekningar. Om jag hade gjort om detta projekt så hade jag lagt ned mycket mer tid på att skapa en mål funktion som faktiskt efterliknar ett mål.
